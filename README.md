@@ -20,18 +20,18 @@ The following gif is a sample of the banana world.
 </p>
 
 ## The agent and the environment 
-The agent receives a reward of $+1$ for collecting yellow bananas and $-1$ for collecting blue bananas. 
+The agent receives a reward of _+1_ for collecting yellow bananas and _-1_ for collecting blue bananas. 
 This is in line with the goal previously mentioned.
 
-The state space has $37$ dimensions, and contains the agent’s velocity, along with ray-based perception of objects around the agent’s forward direction.
+The state space has _37_ dimensions, and contains the agent’s velocity, along with ray-based perception of objects around the agent’s forward direction.
 The agent **MUST** learn how to best select its actions.
 Four discrete actions are available, corresponding to:
--	$0$ - move forward
--	$1$ - move backward
--	$2$ - move left
--	$3$ - move right
+-	`0` - move forward
+-	`1` - move backward
+-	`2` - move left
+-	`3` - move right
 
-The task is episodic, and will be considered solved if the agent reaches a score of $+13$ over $100$ consecutive episodes.
+The task is episodic, and will be considered solved if the agent reaches a score of _+13_ over _100_ consecutive episodes.
 
 # Setup
 This project is a requirement from the [Udacity Deep Reinforcement Learning Nanodegree](https://www.udacity.com/course/deep-reinforcement-learning-nanodegree--nd893).
