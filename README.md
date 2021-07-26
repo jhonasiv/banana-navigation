@@ -81,8 +81,10 @@ cd <path ml-agents>/python
 python3 -m pip install .
 ```
 
-- Download the environment created by Udacity and unzip it at the world folder
+- Clone this repository and download the environment created by Udacity and unzip it at the world folder
 ```bash
+git clone https://github.com/jhonasiv/banana-navigation.git
+cd banana-navigation
 mkdir world
 wget https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip
 unzip Banana_Linux.zip -d world
