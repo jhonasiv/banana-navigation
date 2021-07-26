@@ -130,3 +130,9 @@ dmypy.json
 
 # Autoenv
 .autoenv*
+
+# Unity environment
+Banana*
+
+# Idea folder
+.idea
