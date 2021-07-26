@@ -83,6 +83,7 @@ python3 -m pip install .
 
 - Download the environment created by Udacity and unzip it at the world folder
 ```bash
+mkdir world
 wget https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip
 unzip Banana_Linux.zip -d world
 ```
