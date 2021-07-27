@@ -44,6 +44,7 @@ the [Udacity Deep Reinforcement Learning Nanodegree](https://www.udacity.com/cou
 - Python 3.6
 - Numpy
 - PyTorch
+- Pydantic
 - Unity ML-Agents Beta v0.4
 
 # Installation
