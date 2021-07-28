@@ -22,7 +22,7 @@ architecture, and learning algorithm are described below.
 - `Minibatch size`: 64
 
 I used an Epsilon-greedy policy represented by the [class](src/epsilon_policies.py) `DecayEpsilonGreedy`, which 
-resembles the following code.
+resembles the following code:
 ```python
 class DecayEpsilonGreedy:
     """
@@ -39,7 +39,7 @@ class DecayEpsilonGreedy:
         self.epsilon = max(self.epsilon, self.epsilon_min)
         return self.epsilon
 ```
-where the step method is called after every time step, updating and returning the value of epsilon.
+The step method is called after every time step, updating and returning the value of epsilon.
 
 ## Network architecture
 
