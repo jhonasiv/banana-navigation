@@ -22,6 +22,7 @@ def train(env: UnityEnvironment, brain_name: str, agent: DRLAgent, model_path: s
     :param brain_name: brain name of the agent
     :param agent: agent object
     :param num_eps: number of episodes to run
+    :returns: list of scores
     """
     # Initialize the scores list and the scores window for the last 100 episodes
     scores = []
@@ -60,7 +61,11 @@ def train(env: UnityEnvironment, brain_name: str, agent: DRLAgent, model_path: s
     return scores
 
 
-def plot_scores(scores: List[float]):
+def plot_scores(scores: List[float]) -> None:
+    """
+    Plot scores from trained agent.
+    :param scores: scores obtained after training
+    """
     fig = plt.figure()
     ax = fig.add_subplot(111)
     plt.plot(np.arange(len(scores)), scores)
@@ -91,7 +96,10 @@ def render(env: UnityEnvironment, brain_name: str, agent: DRLAgent) -> None:
 
 
 def main(batch: int, update_rate: int, dr: float, tau: float, env_path: str, lr: float, model_path: str,
-         eval: bool):
+         eval: bool) -> None:
+    """
+    Main function of the program
+    """
     env = UnityEnvironment(file_name=env_path)
     
     brain_name = env.brain_names[0]

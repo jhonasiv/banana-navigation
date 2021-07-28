@@ -18,6 +18,9 @@ experience = namedtuple("Experience", field_names=["state", "action", "reward", 
 
 @dataclass
 class DRLAgent(abc.ABC):
+    """
+    Abstract deep reinforcement learning agent.
+    """
     state_size: int  # size of each state in the state space
     action_size: int  # size of the action space
     lr: float  # learning rate
@@ -61,13 +64,14 @@ class DRLAgent(abc.ABC):
     
     def soft_update(self) -> None:
         """
-        Soft updates the target network with parameters from the local network
+        Soft-updates the target network with the recently-updated parameters of the local network, with self.tau as
+        step-size.
         """
 
 
 class DQNetAgent(DRLAgent):
     """
-    Agent using Deep Q-Networks to learn about the environment.
+    Deep Q-Network agent.
     """
     
     def __init__(self, **data: Any):
@@ -121,6 +125,7 @@ class DQNetAgent(DRLAgent):
         # Get the estimates for the local network and gather the action-value for each action taken in the sample.
         local_estimate = self.q_local(states).gather(1, actions)
         
+        # Calculate the loss and applies gradient descent
         loss = f.mse_loss(local_estimate, target_estimate)
         self.optimizer.zero_grad()
         loss.backward()
