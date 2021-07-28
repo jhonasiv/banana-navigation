@@ -1,14 +1,14 @@
 import abc
 import math
 
-from pydantic import BaseModel
+from dataclasses import dataclass
 
 
-class EpsilonGreedyPolicy(BaseModel):
-    epsilon_min: float
-    epsilon: float = 1.0
+@dataclass
+class EpsilonGreedyPolicy(abc.ABC):
+    epsilon: float
     
-    # @abc.abstractmethod
+    @abc.abstractmethod
     def step(self, time_step: int) -> float:
         """
         Calculate epsilon for this time step
@@ -18,6 +18,7 @@ class EpsilonGreedyPolicy(BaseModel):
         raise NotImplementedError
 
 
+@dataclass
 class ConstantEpsilonGreedy(EpsilonGreedyPolicy):
     epsilon: float
     
@@ -25,6 +26,7 @@ class ConstantEpsilonGreedy(EpsilonGreedyPolicy):
         return self.epsilon
 
 
+@dataclass
 class DecayEpsilonGreedy(EpsilonGreedyPolicy):
     """
     Epsilon greedy policy where
@@ -32,8 +34,8 @@ class DecayEpsilonGreedy(EpsilonGreedyPolicy):
      epsilon = epsilon * epsilon_decay_rate^(time step)
     """
     epsilon_min: float
-    epsilon: float = 1.0
     epsilon_decay_rate: float
+    epsilon: float
     
     def step(self, time_step: int) -> float:
         self.epsilon *= self.epsilon_decay_rate
@@ -41,6 +43,7 @@ class DecayEpsilonGreedy(EpsilonGreedyPolicy):
         return self.epsilon
 
 
+@dataclass
 class ExponentialEpsilonGreedy(EpsilonGreedyPolicy):
     """
     Exponentially calculate epsilon, using the following equation
@@ -50,7 +53,7 @@ class ExponentialEpsilonGreedy(EpsilonGreedyPolicy):
     exp_k: float
     exp_b: float
     epsilon_min: float
-    epsilon: float = 1.0
+    epsilon: float
     
     def step(self, time_step: int) -> float:
         self.epsilon = math.exp(self.exp_k * int((time_step / self.exp_b) ** 2))

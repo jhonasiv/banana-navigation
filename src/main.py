@@ -53,7 +53,7 @@ def train(env: UnityEnvironment, brain_name: str, agent: DRLAgent, model_path: s
         print(f"\rEpisode {j}/{num_eps}\t Average Score: {np.mean(scores_window)}", end="")
         if j % 100 == 0:
             print(f"\rEpisode {j}/{num_eps}\t Average Score: {np.mean(scores_window)}")
-        if np.mean(scores_window) >= 15:
+        if np.mean(scores_window) >= 13:
             print(f"\nEnvironment solved in {j - 100:d} episodes!\t Average Score: {np.mean(scores_window):.2f}")
             torch.save(agent.q_local.state_dict(), model_path)
             break
@@ -105,8 +105,7 @@ def main(batch: int, update_rate: int, dr: float, tau: float, env_path: str, lr:
     logging.info(f"Action size: {action_size}, State size: {state_size}")
     logging.info(f"State sample:\n {env_info.vector_observations[0]}")
     
-    # e_policy = ExponentialEpsilonGreedy(epsilon_min=0.05, exp_k=3e-2, exp_b=150)
-    e_policy = DecayEpsilonGreedy(epsilon_min=0.05, epsilon_decay_rate=0.999)
+    e_policy = DecayEpsilonGreedy(epsilon=1., epsilon_min=0.05, epsilon_decay_rate=0.999)
     agent = DQNetAgent(state_size=state_size, action_size=action_size, seed=0, lr=lr, batch_size=batch, tau=tau,
                        gamma=dr, update_every=update_rate, epsilon_greedy_policy=e_policy)
     if not eval:
@@ -114,7 +113,7 @@ def main(batch: int, update_rate: int, dr: float, tau: float, env_path: str, lr:
         plot_scores(scores)
     else:
         agent.load(model_path)
-    render(env, brain_name, agent, 10)
+    render(env, brain_name, agent)
 
 
 if __name__ == '__main__':
@@ -128,7 +127,7 @@ if __name__ == '__main__':
     parser.add_argument("--lr", default=1e-4, type=float, help="Learning rate")
     parser.add_argument("--model_path", default="../models/ckpt.pth", type=str,
                         help="Model path")
-    parser.add_argument("--eval", nargs='?', const=True, help="Train the agent")
+    parser.add_argument("--eval", nargs='?', const=True, help="Renders a sample of the environment")
     
     args = vars(parser.parse_args())
     print(f"Command-line arguments:\n\t{args}")

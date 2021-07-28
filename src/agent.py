@@ -25,7 +25,7 @@ class DRLAgent(abc.ABC):
     seed: Optional[int]  # seed
     buffer_size: int = int(1e5)  # experience memory buffer size
     batch_size: int = 64  # experience memory batch size
-    update_every: int = 6  # how often the target network is updated
+    update_every: int = 4  # how often the target network is updated
     gamma: float = 0.99  # discount factor
     tau: float = 1e-3  # step-size for soft updating the target network
     
@@ -166,7 +166,7 @@ class ReplayBuffer:
         :param seed: random seed
         """
         super(ReplayBuffer, self).__init__()
-        np.random.seed(seed)
+        random.seed(seed)
         self.batch_size = batch_size
         self.memory = deque(maxlen=buffer_size)
     
