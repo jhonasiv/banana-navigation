@@ -25,11 +25,6 @@ I used an Epsilon-greedy policy represented by the [class](src/epsilon_policies.
 resembles the following code:
 ```python
 class DecayEpsilonGreedy:
-    """
-    Epsilon greedy policy where
-     
-     epsilon = epsilon * epsilon_decay_rate^(time step)
-    """
     epsilon_min: float
     epsilon_decay_rate: float
     epsilon: float
